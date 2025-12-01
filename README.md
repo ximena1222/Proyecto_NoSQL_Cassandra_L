@@ -8,7 +8,7 @@ Proyecto de base de datos NoSQL con Cassandra
 **Integrantes:**  
 - Lira Llama Ximena Estefania  
 - Xool Lopez Sandy Linzay
-- Valen (escribe tu nombre completo vale)  
+- Canul Chacon Karol Valentina  
 **Fecha de entrega:** 2 diciembre 2025
 
 # b.**Descripción del DataSet:**
