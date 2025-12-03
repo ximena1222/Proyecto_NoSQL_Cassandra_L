@@ -1,7 +1,7 @@
 # Proyecto_NoSQL_Cassandra
 Proyecto de base de datos NoSQL con Cassandra
 
-#**Dataset: Laptop Price Dataset (Kaggle)**
+# **Dataset: Laptop Price Dataset (Kaggle)**
 
 **Materia:** Modelado de Datos  
 **Proyecto:** Base de Datos NoSQL (Cassandra)  
@@ -12,11 +12,11 @@ Proyecto de base de datos NoSQL con Cassandra
 - Canul Chacon Karol Valentina  
 **Fecha de entrega:** 2 diciembre 2025
 
-#**Descripción del DataSet:**
+# **Descripción del DataSet:**
 El dataset **“Laptop Price Dataset”** contiene información detallada sobre computadoras portátiles disponibles en el mercado, cada registro corresponde a un modelo de laptop con características como marca, procesador, RAM, almacenamiento, tarjeta gráfica, sistema operativo, peso y precio.
 **Fuente:** Kaggle – Laptop Price Dataset (mkechinov)
 
-#**Diccionario de datos:**
+# **Diccionario de datos:**
 Company: Texto : Marca del fabricante de la laptop
 
 Product: Texto :Nombre o modelo del equipo
@@ -41,10 +41,10 @@ Weight: Texto : Peso del equipo
 
 Price_euros: Decimal : Precio en euros
 
-# d.**Modelado NoSQL en Cassandra:**
+# **Modelado NoSQL en Cassandra:**
 Cassandra utiliza un modelo **orientado a columnas**, donde el diseño depende especificamente de las consultas que se realizarán.
 Por lo que creamos tres tablas principales:
-## Tabla 1: laptops_by_company  
+# Tabla 1: laptops_by_company  
 Consulta principal: *Obtener laptops por marca*
 
 ```sql
@@ -64,7 +64,7 @@ CREATE TABLE laptops_by_company (
     PRIMARY KEY (company, product)
 );
 ```
-## Tabla 2: laptops_by_cpu  
+# Tabla 2: laptops_by_cpu  
 Consulta principal: *Obtener laptops según procesador*
 ```sql
 CREATE TABLE laptops_by_cpu (
@@ -78,7 +78,7 @@ CREATE TABLE laptops_by_cpu (
     PRIMARY KEY (cpu, product)
 );
 ```
-## Tabla 3: laptops_by_priceRange  
+# Tabla 3: laptops_by_priceRange  
 Consulta principal: *Obtener laptops por rango de precio*
 ```sql
 CREATE TABLE laptops_by_price_range (
