@@ -236,54 +236,45 @@ A continuación se definen y describen 5 ejemplos de sentencias para cada operac
 
 ### CREATE (insertar registros)
 ```SQL
-INSERT INTO laptops (company, product, cpu, ram, price_euros)
-VALUES ('Dell', 'Inspiron 15', 'Intel i5', '8GB', 650);
+INSERT INTO laptops_full (brand, name, price, spec_rating, processor, cpu_architecture, ram, ram_type, rom, rom_type, gpu, display_size, resolution_width, resolution_height, os, warranty)
+VALUES ('Dell', 'XPS 13', 1200.0, 4.6, 'Intel i7', 'x64', '16GB', 'DDR4', '512GB', 'SSD', 'Intel Iris', 13.3, 1920, 1080, 'Windows 11', '1 año');
 
-INSERT INTO laptops (company, product, cpu, ram, price_euros)
-VALUES ('HP', 'Pavilion', 'AMD Ryzen 7', '16GB', 850);
+INSERT INTO laptops_full (brand, name, price, spec_rating, processor, cpu_architecture, ram, ram_type, rom, rom_type, gpu, display_size, resolution_width, resolution_height, os, warranty)
+VALUES ('HP', 'Pavilion 15', 850.0, 4.0, 'Intel i5', 'x64', '8GB', 'DDR4', '256GB', 'SSD', 'Intel HD', 15.6, 1920, 1080, 'Windows 10', '2 años');
 
-INSERT INTO laptops (company, product, cpu, ram, price_euros)
-VALUES ('Lenovo', 'ThinkPad X1', 'Intel i7', '16GB', 1200);
+INSERT INTO laptops_full (brand, name, price, spec_rating, processor, cpu_architecture, ram, ram_type, rom, rom_type, gpu, display_size, resolution_width, resolution_height, os, warranty)
+VALUES ('Apple', 'MacBook Air', 1400.0, 4.8, 'M1', 'ARM', '8GB', 'LPDDR4', '256GB', 'SSD', 'Apple GPU', 13.3, 2560, 1600, 'macOS', '1 año');
 
-INSERT INTO laptops (company, product, cpu, ram, price_euros)
-VALUES ('Apple', 'MacBook Air', 'M1', '8GB', 1100);
+INSERT INTO laptops_full (brand, name, price, spec_rating, processor, cpu_architecture, ram, ram_type, rom, rom_type, gpu, display_size, resolution_width, resolution_height, os, warranty)
+VALUES ('Lenovo', 'ThinkPad X1', 1300.0, 4.7, 'Intel i7', 'x64', '16GB', 'DDR4', '512GB', 'SSD', 'Intel Iris', 14.0, 1920, 1080, 'Windows 11', '3 años');
 
-INSERT INTO laptops (company, product, cpu, ram, price_euros)
-VALUES ('Asus', 'ZenBook', 'Intel i5', '16GB', 900);
+INSERT INTO laptops_full (brand, name, price, spec_rating, processor, cpu_architecture, ram, ram_type, rom, rom_type, gpu, display_size, resolution_width, resolution_height, os, warranty)
+VALUES ('Acer', 'Aspire 5', 600.0, 3.8, 'AMD Ryzen 5', 'x64', '8GB', 'DDR4', '256GB', 'SSD', 'AMD Vega', 15.6, 1920, 1080, 'Windows 10', '1 año');
+
 ```
 ### READ (Consultar registros)
 ```SQL
-SELECT * FROM laptops WHERE company = 'Dell';
-SELECT product, price_euros FROM laptops WHERE company = 'HP';
-
-SELECT * FROM laptops WHERE ram = '16GB';
-SELECT company, product FROM laptops WHERE price_euros < 1000;
-
-SELECT * FROM laptops WHERE cpu = 'Intel i7';
+SELECT * FROM laptops_full WHERE brand = 'Dell';
+SELECT brand, name, price FROM laptops_full WHERE price > 1000;
+SELECT brand, name, ram FROM laptops_full WHERE ram = '16GB';
+SELECT * FROM laptops_full WHERE processor = 'Intel i5';
+SELECT brand, name, gpu FROM laptops_full WHERE gpu = 'Intel Iris';
 ```
 ### UPDATE (Modificar Registros)
 ```SQL
-UPDATE laptops SET ram = '32GB' WHERE company = 'Lenovo' AND product = 'ThinkPad X1';
-
-UPDATE laptops SET price_euros = 700 WHERE company = 'Dell' AND product = 'Inspiron 15';
-
-UPDATE laptops SET cpu = 'Intel i9' WHERE company = 'HP' AND product = 'Pavilion';
-
-UPDATE laptops SET ram = '16GB' WHERE company = 'Apple' AND product = 'MacBook Air';
-
-UPDATE laptops SET price_euros = 950 WHERE company = 'Asus' AND product = 'ZenBook';
+UPDATE laptops_full SET ram = '32GB' WHERE brand = 'Dell' AND name = 'XPS 13';
+UPDATE laptops_full SET price = 900.0 WHERE brand = 'HP' AND name = 'Pavilion 15';
+UPDATE laptops_full SET warranty = '3 años' WHERE brand = 'Apple' AND name = 'MacBook Air';
+UPDATE laptops_full SET display_size = 15.0 WHERE brand = 'Lenovo' AND name = 'ThinkPad X1';
+UPDATE laptops_full SET gpu = 'AMD Radeon' WHERE brand = 'Acer' AND name = 'Aspire 5';
 ```
 ### DELETE (Elimina Registros)
 ```SQL
-DELETE FROM laptops WHERE company = 'Dell' AND product = 'Inspiron 15';
-
-DELETE FROM laptops WHERE company = 'HP' AND product = 'Pavilion';
-
-DELETE FROM laptops WHERE company = 'Lenovo' AND product = 'ThinkPad X1';
-
-DELETE FROM laptops WHERE company = 'Apple' AND product = 'MacBook Air';
-
-DELETE FROM laptops WHERE company = 'Asus' AND product = 'ZenBook';
+DELETE FROM laptops_full WHERE brand = 'Dell' AND name = 'XPS 13';
+DELETE FROM laptops_full WHERE brand = 'HP' AND name = 'Pavilion 15';
+DELETE FROM laptops_full WHERE brand = 'Apple' AND name = 'MacBook Air';
+DELETE FROM laptops_full WHERE brand = 'Lenovo' AND name = 'ThinkPad X1';
+DELETE FROM laptops_full WHERE brand = 'Acer' AND name = 'Aspire 5';
 ```
 
 ## Operaciones Realizadas 
@@ -307,18 +298,25 @@ La aplicación web implementa las siguientes funcionalidades:
 ## Ejecución 
 1. Clonar el repositorio:
    ```bash
-   git clone https://github.com/tu_usuario/inventario-laptops.git
+   git clone https://github.com/US/inventario-laptops.git
     cd inventario-laptops
     ```
 2. instalar independencias
    ```bash
    pip install -r requirements.txt
     ```
-3. Iniciar la aplicacion Flask
+3. Iniciar cassandra
+    ```bash
+   sudo systemctl start cassandra
+   sudo systemctl status cassandra
+    ```
+4. Iniciar la aplicacion Flask
     ```bash
    flask run
+   python3 app.py
+
     ```
-4. Acceder al navegador
+5. Acceder al navegador
     ```bash
     http://127.0.0.1:5000
     ```
