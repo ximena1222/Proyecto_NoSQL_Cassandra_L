@@ -92,13 +92,16 @@ CREATE TABLE laptops_by_price_range (
     PRIMARY KEY (price_range, product)
 );
 ```
-# e.**Herramientas usadas:**
+# **Herramientas usadas:**
 Cassandra: Base de datos NoSQL columnar
+
 cqlsh: Cliente CLI para ejecutar comandos CQL
+
 cassandra driver: Interseción de datos desde Phyton hacia Cassandra
+
 GitHub & GitHub Desktop: Control de versione sy repositorio
 
-# f.**Importanción de datos:**
+# **Importanción de datos:**
 1.-Creamos el Keyspace:
 ```Sql
 CREATE KEYSPACE laptopsdb
@@ -142,7 +145,7 @@ for _, row in df.iterrows():
         VALUES (%s, %s, %s, %s, %s, %s, %s)
     """, (price_range, row['Product'], row['Company'], row['Cpu'], row['Ram'], row['Gpu'], row['Price_euros']))
 ```
-# g.**Sentencias para cada una de las operaciones CRUD:**
+# **Sentencias para cada una de las operaciones CRUD:**
 1.-CRUD:
 ```SQL
 INSERT INTO laptops_by_company (company, product, typeName, inches, screenResolution, cpu, ram, memory, gpu, opSys, weight, price_euros)
