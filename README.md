@@ -1,6 +1,6 @@
-# Proyecto_NoSQL_Cassandra_L
+# Proyecto_NoSQL_Cassandra
 Proyecto de base de datos NoSQL con Cassandra
-## **Dataset: Laptop Price Dataset (Kaggle)**
+**Dataset: Laptop Price Dataset (Kaggle)**
 
 **Materia:** Modelos de Datos  
 **Proyecto:** Base de Datos NoSQL – Cassandra  
