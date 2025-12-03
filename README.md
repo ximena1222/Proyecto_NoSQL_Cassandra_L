@@ -187,7 +187,14 @@ VALUES ('Intel i5', 'HP ProBook 450', 'HP', '8GB', '256GB SSD', 'Intel HD', 650)
 INSERT INTO laptops_by_price_range (price_range, product, company, cpu, ram, gpu, price_euros)
 VALUES ('Low', 'Acer Aspire 1', 'Acer', 'Intel Celeron', '4GB', '64GB Flash', 'Intel HD', 299);
 
-INSERT INTO laptops_full (brand, name, price, spec_rating, processor, cpu_architecture, ram, ram_type, rom, rom_type, gpu, display_size, resolution_width, resolution_height, os, warranty)
+INSERT INTO laptops_full (
+    brand, name, price, spec_rating, processor, cpu_architecture, ram, ram_type, rom,
+    rom_type, gpu, display_size, resolution_width, resolution_height, os, warranty
+)
+VALUES (
+    'Dell', 'XPS 14', 1500.0, 4.5, 'Intel i7', 'x64', '16GB', 'DDR4', '512GB', 
+    'SSD', 'Intel Iris', 14.0, 1920, 1080, 'Windows 11', '1 año'
+);
 ```
     1.1_READ:
 ```SQL
@@ -195,7 +202,8 @@ INSERT INTO laptops_full (brand, name, price, spec_rating, processor, cpu_archit
     SELECT * FROM laptops_by_cpu WHERE cpu = 'Intel i7';
     SELECT * FROM laptops_by_price_range WHERE price_range = 'Low';
     SELECT product, price_euros FROM laptops_by_company WHERE company = 'Lenovo';
-    SELECT * FROM laptops_by_company WHERE company = 'Apple';
+    SELECT brand, name, processor, cpu_architecture, ram, price FROM laptops_full WHERE brand = 'Dell';
+
 ```
     1.2_UPDATE:
 ```SQL
@@ -203,7 +211,8 @@ INSERT INTO laptops_full (brand, name, price, spec_rating, processor, cpu_archit
     UPDATE laptops_by_cpu SET price_euros = 1300 WHERE cpu = 'Intel i7' AND product = 'XPS 14';
     UPDATE laptops_by_price_range SET price_euros = 699 WHERE price_range = 'Low' AND product = 'HP Stream';
     UPDATE laptops_by_company SET inches = 15.6 WHERE company = 'HP' AND product = 'Pavilion 15';
-    UPDATE laptops_by_company SET weight = '1.1kg' WHERE company = 'Apple' AND product = 'MacBook Air';
+    UPDATE laptops_full SET ram = '32GB' WHERE brand = 'Dell' AND name = 'XPS 14';
+    
 ```
     1.3_DELETE:
 ```SQL
@@ -211,7 +220,7 @@ INSERT INTO laptops_full (brand, name, price, spec_rating, processor, cpu_archit
     DELETE FROM laptops_by_cpu WHERE cpu = 'Intel i5' AND product = 'HP ProBook 450';
     DELETE FROM laptops_by_price_range WHERE price_range = 'High' AND product = 'MacBook Pro 16';
     DELETE FROM laptops_by_company WHERE company = 'Acer' AND product = 'Aspire 3';
-    DELETE FROM laptops_by_cpu WHERE cpu = 'AMD Ryzen 5' AND product = 'Lenovo Legion Y520';
+    DELETE FROM laptops_full WHERE brand = 'Dell' AND name = 'XPS 14';
 ```
 
 
