@@ -82,22 +82,28 @@ CREATE TABLE laptops_by_cpu (
     PRIMARY KEY (cpu, product)
 );
 ```
-# Tabla 3: laptops_by_price_range  
-Consulta principal: *Obtener laptops por rango de precio*
-PK: price_range
-CK: product
+# Tabla 3: laptops_full (Todas las laptops)
 
 ```sql
-CREATE TABLE laptops_by_price_range (
-    price_range TEXT,
-    product TEXT,
-    company TEXT,
-    cpu TEXT,
-    ram TEXT,
-    gpu TEXT,
-    price_euros DECIMAL,
-    PRIMARY KEY (price_range, product)
-);
+CREATE TABLE laptops_full (
+             ...     brand TEXT,
+             ...     name TEXT,
+             ...     price DECIMAL,
+             ...     spec_rating DECIMAL,
+             ...     processor TEXT,
+             ...     cpu_architecture TEXT,
+             ...     ram TEXT,
+             ...     ram_type TEXT,
+             ...     rom TEXT,
+             ...     rom_type TEXT,
+             ...     gpu TEXT,
+             ...     display_size DECIMAL,
+             ...     resolution_width INT,
+             ...     resolution_height INT,
+             ...     os TEXT,
+             ...     warranty TEXT,
+             ...     PRIMARY KEY (brand, name)
+             ... );
 ```
 Clasifica los precios pór categorías:
 LOW: (<700€)
@@ -172,14 +178,11 @@ VALUES ('Intel i5', 'HP ProBook 450', 'HP', '8GB', '256GB SSD', 'Intel HD', 650)
 INSERT INTO laptops_by_price_range (price_range, product, company, cpu, ram, gpu, price_euros)
 VALUES ('Low', 'Acer Aspire 1', 'Acer', 'Intel Celeron', '4GB', '64GB Flash', 'Intel HD', 299);
 
-INSERT INTO laptops_by_company (company, product, typeName, inches, screenResolution, cpu, ram, memory, gpu, opSys, weight, price_euros)
-VALUES ('Dell', 'XPS 14', 'Ultrabook', 13.0, '1920x1080', 'Intel i7', '16GB', '512GB SSD', 'Intel Iris', 'Windows 10', '1.3kg', 1300);
-INSERT INTO laptops_by_cpu (cpu, product, company, ram, memory, gpu, price_euros)
-VALUES ('Intel i5', 'HP ProBook 450', 'HP', '16GB', '256GB SSD', 'Intel HD', 1000);
+INSERT INTO laptops_full (brand, name, price, spec_rating, processor, cpu_architecture, ram, ram_type, rom, rom_type, gpu, display_size, resolution_width, resolution_height, os, warranty)
 ```
     1.1_READ:
 ```SQL
-    SELECT * FROM laptops_by_company WHERE company = 'Dell';
+    __SELECT * FROM laptops_by_company WHERE company = 'Dell';__
     SELECT * FROM laptops_by_cpu WHERE cpu = 'Intel i7';
     SELECT * FROM laptops_by_price_range WHERE price_range = 'Low';
     SELECT product, price_euros FROM laptops_by_company WHERE company = 'Lenovo';
@@ -187,7 +190,7 @@ VALUES ('Intel i5', 'HP ProBook 450', 'HP', '16GB', '256GB SSD', 'Intel HD', 100
 ```
     1.2_UPDATE:
 ```SQL
-    UPDATE laptops_by_company SET ram = '32GB' WHERE company = 'Dell' AND product = 'XPS 14';
+    __UPDATE laptops_by_company SET ram = '32GB' WHERE company = 'Dell' AND product = 'XPS 14';__
     UPDATE laptops_by_cpu SET price_euros = 1300 WHERE cpu = 'Intel i7' AND product = 'XPS 14';
     UPDATE laptops_by_price_range SET price_euros = 699 WHERE price_range = 'Low' AND product = 'HP Stream';
     UPDATE laptops_by_company SET inches = 15.6 WHERE company = 'HP' AND product = 'Pavilion 15';
@@ -195,7 +198,7 @@ VALUES ('Intel i5', 'HP ProBook 450', 'HP', '16GB', '256GB SSD', 'Intel HD', 100
 ```
     1.3_DELETE:
 ```SQL
-    DELETE FROM laptops_by_company WHERE company = 'Dell' AND product = 'XPS 14';
+    __DELETE FROM laptops_by_company WHERE company = 'Dell' AND product = 'XPS 14';__
     DELETE FROM laptops_by_cpu WHERE cpu = 'Intel i5' AND product = 'HP ProBook 450';
     DELETE FROM laptops_by_price_range WHERE price_range = 'High' AND product = 'MacBook Pro 16';
     DELETE FROM laptops_by_company WHERE company = 'Acer' AND product = 'Aspire 3';
