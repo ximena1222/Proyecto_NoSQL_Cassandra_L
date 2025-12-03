@@ -201,3 +201,106 @@ VALUES ('Intel i5', 'HP ProBook 450', 'HP', '16GB', '256GB SSD', 'Intel HD', 100
     DELETE FROM laptops_by_company WHERE company = 'Acer' AND product = 'Aspire 3';
     DELETE FROM laptops_by_cpu WHERE cpu = 'AMD Ryzen 5' AND product = 'Lenovo Legion Y520';
 ```
+
+
+# Aplicación Web CRUD
+Inventario de Laptops con Cassandra
+
+Este proyecto implementa una aplicación web simple en Flask conectada a una base de datos Apache Cassandra, que permite realizar operaciones CRUD (Create, Read, Update, Delete) sobre un dataset de laptops.
+
+La aplicación se integra en el mismo repositorio donde se almacena el dataset (data.csv) y ofrece una interfaz gráfica para gestionar el inventario.
+
+## Sentencias CRUD en la Base de Datos
+A continuación se definen y describen 5 ejemplos de sentencias para cada operación CRUD en Cassandra CQL:
+
+### CREATE (insertar registros)
+```SQL
+INSERT INTO laptops (company, product, cpu, ram, price_euros)
+VALUES ('Dell', 'Inspiron 15', 'Intel i5', '8GB', 650);
+
+INSERT INTO laptops (company, product, cpu, ram, price_euros)
+VALUES ('HP', 'Pavilion', 'AMD Ryzen 7', '16GB', 850);
+
+INSERT INTO laptops (company, product, cpu, ram, price_euros)
+VALUES ('Lenovo', 'ThinkPad X1', 'Intel i7', '16GB', 1200);
+
+INSERT INTO laptops (company, product, cpu, ram, price_euros)
+VALUES ('Apple', 'MacBook Air', 'M1', '8GB', 1100);
+
+INSERT INTO laptops (company, product, cpu, ram, price_euros)
+VALUES ('Asus', 'ZenBook', 'Intel i5', '16GB', 900);
+```
+### READ (Consultar registros)
+```SQL
+SELECT * FROM laptops WHERE company = 'Dell';
+SELECT product, price_euros FROM laptops WHERE company = 'HP';
+
+SELECT * FROM laptops WHERE ram = '16GB';
+SELECT company, product FROM laptops WHERE price_euros < 1000;
+
+SELECT * FROM laptops WHERE cpu = 'Intel i7';
+```
+### UPDATE (Modificar Registros)
+```SQL
+UPDATE laptops SET ram = '32GB' WHERE company = 'Lenovo' AND product = 'ThinkPad X1';
+
+UPDATE laptops SET price_euros = 700 WHERE company = 'Dell' AND product = 'Inspiron 15';
+
+UPDATE laptops SET cpu = 'Intel i9' WHERE company = 'HP' AND product = 'Pavilion';
+
+UPDATE laptops SET ram = '16GB' WHERE company = 'Apple' AND product = 'MacBook Air';
+
+UPDATE laptops SET price_euros = 950 WHERE company = 'Asus' AND product = 'ZenBook';
+```
+### DELETE (Elimina Registros)
+```SQL
+DELETE FROM laptops WHERE company = 'Dell' AND product = 'Inspiron 15';
+
+DELETE FROM laptops WHERE company = 'HP' AND product = 'Pavilion';
+
+DELETE FROM laptops WHERE company = 'Lenovo' AND product = 'ThinkPad X1';
+
+DELETE FROM laptops WHERE company = 'Apple' AND product = 'MacBook Air';
+
+DELETE FROM laptops WHERE company = 'Asus' AND product = 'ZenBook';
+```
+
+## Operaciones Realizadas 
+La aplicación web implementa las siguientes funcionalidades: 
+
+- Inicio (/): Página principal con acceso al inventario.
+- Inventario (/inventory): Visualización completa de todas las laptops en una tabla.
+- Crear (/create): Formulario para agregar nuevas laptops.
+- Leer (/read): Búsqueda de laptops filtradas por compañía.
+- Actualizar (/update): Modificación de la memoria RAM de una laptop específica.
+- Eliminar (/delete): Eliminación de laptops por compañía y producto.
+
+## Lenguaje y herramientas utilizadas
+
+- Lenguaje principal: Python 3
+- Framework Web: Flask 3.0.0
+- Base de Datos: Apache Cassandra 3.28.0
+- Manejo de datos: Pandas (para cargar y procesar el dataset data.csv)
+- Frontend: HTML5, CSS3 (plantillas Jinja2 y estilos personalizados)
+
+## Ejecución 
+1. Clonar el repositorio:
+   ```bash
+   git clone https://github.com/tu_usuario/inventario-laptops.git
+    cd inventario-laptops
+    ```
+2. instalar independencias
+   ```bash
+   pip install -r requirements.txt
+    ```
+3. Iniciar la aplicacion Flask
+    ```bash
+   flask run
+    ```
+4. Acceder al navegador
+    ```bash
+    http://127.0.0.1:5000
+    ```
+## Conclusión
+El proyecto demuestra cómo integrar un dataset real en una base de datos distribuida (Cassandra) y gestionarlo mediante una aplicación web en Flask.  
+La implementación de las operaciones CRUD garantiza que el sistema sea funcional y extensible, y el diseño modular permite futuras mejoras como autenticación de usuarios, exportación de datos y generación de estadísticas.
