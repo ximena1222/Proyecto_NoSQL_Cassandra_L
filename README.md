@@ -1,9 +1,10 @@
 # Proyecto_NoSQL_Cassandra
 Proyecto de base de datos NoSQL con Cassandra
-**Dataset: Laptop Price Dataset (Kaggle)**
 
-**Materia:** Modelos de Datos  
-**Proyecto:** Base de Datos NoSQL – Cassandra  
+#**Dataset: Laptop Price Dataset (Kaggle)**
+
+**Materia:** Modelado de Datos  
+**Proyecto:** Base de Datos NoSQL (Cassandra)  
 **Profesor:** M. en C. Luis R. Basto  
 **Integrantes:**  
 - Lira Llama Ximena Estefania  
@@ -11,27 +12,38 @@ Proyecto de base de datos NoSQL con Cassandra
 - Canul Chacon Karol Valentina  
 **Fecha de entrega:** 2 diciembre 2025
 
-# b.**Descripción del DataSet:**
-El dataset **“Laptop Price Dataset”** contiene información detallada sobre computadoras portátiles disponibles en el mercado. Cada registro corresponde a un modelo de laptop con características como marca, procesador, RAM, almacenamiento, tarjeta gráfica, sistema operativo, peso y precio.
+#**Descripción del DataSet:**
+El dataset **“Laptop Price Dataset”** contiene información detallada sobre computadoras portátiles disponibles en el mercado, cada registro corresponde a un modelo de laptop con características como marca, procesador, RAM, almacenamiento, tarjeta gráfica, sistema operativo, peso y precio.
 **Fuente:** Kaggle – Laptop Price Dataset (mkechinov)
 
-# c.**Diccionario de datos:**
-Company: Texto : Marca del fabricante de la laptot
+#**Diccionario de datos:**
+Company: Texto : Marca del fabricante de la laptop
+
 Product: Texto :Nombre o modelo del equipo
+
 TypeName: Texto : Categoría (si es notebook, gaming, étc.)
+
 Inches: Decimal : Tamaño de la pantalla en pulgadas
+
 ScreenResolution: Texto : Resolución de la pantalla
+
 Cpu: Texto : Información del procesador
+
 Ram: Texto : Cantidad de memoria RAM
+
 Memory: Texto : Tipo y capacidad de almacenamiento
+
 Gpu: Texto : Targeta gráfica
+
 OpSys: Texto : Sistema operativo que maneja
+
 Weight: Texto : Peso del equipo
+
 Price_euros: Decimal : Precio en euros
 
 # d.**Modelado NoSQL en Cassandra:**
-Cassandra utiliza un modelo **orientado a columnas**, donde el diseño depende de las consultas que se realizarán.
-Creamos tres tablas principales:
+Cassandra utiliza un modelo **orientado a columnas**, donde el diseño depende especificamente de las consultas que se realizarán.
+Por lo que creamos tres tablas principales:
 ## Tabla 1: laptops_by_company  
 Consulta principal: *Obtener laptops por marca*
 
@@ -85,7 +97,6 @@ Cassandra: Base de datos NoSQL columnar
 cqlsh: Cliente CLI para ejecutar comandos CQL
 cassandra driver: Interseción de datos desde Phyton hacia Cassandra
 GitHub & GitHub Desktop: Control de versione sy repositorio
-Python 3 + Pandas: Para la lectura del CSV
 
 # f.**Importanción de datos:**
 1.-Creamos el Keyspace:
