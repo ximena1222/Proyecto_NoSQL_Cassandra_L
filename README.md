@@ -17,29 +17,38 @@ El dataset **“Laptop Price Dataset”** contiene información detallada sobre 
 **Fuente:** Kaggle – Laptop Price Dataset (mkechinov)
 
 # **Diccionario de datos:**
-Company: Texto : Marca del fabricante de la laptop
+Brand Texto : Marca del fabricante de la laptop
 
-Product: Texto :Nombre o modelo del equipo
+Name: Texto :Nombre o modelo del equipo
 
-TypeName: Texto : Categoría (si es notebook, gaming, étc.)
+Price: Decimal : Precio en euros
 
-Inches: Decimal : Tamaño de la pantalla en pulgadas
+spec_rating: Puntuación general del dispositivo, un valor numérico que resume la calidad o desempeño según el sitio que creó el dataset.
 
-ScreenResolution: Texto : Resolución de la pantalla
+processor: Nombre y generación del procesador
 
 Cpu: Texto : Información del procesador
 
 Ram: Texto : Cantidad de memoria RAM
 
-Memory: Texto : Tipo y capacidad de almacenamiento
+Ram:type: Tipo de RAM: DDR4, DDR5, LPDDR5, etc.
+
+ROM: Almacenamiento interno de la laptop
+
+ROM_type: Tipo de almacenamiento: SSD, HDD, eMMC, etc.
 
 Gpu: Texto : Targeta gráfica
 
-OpSys: Texto : Sistema operativo que maneja
+display_size: float: Tamaño de la pantalla en pulgadas.
 
-Weight: Texto : Peso del equipo
+resolution_width: int : Resolución HORIZONTAl de la pantalla 
 
-Price_euros: Decimal : Precio en euros
+resolution_width: int: Resolución vertical de la pantalla 
+
+OS: tEXTO: Sistema operativo preinstalado
+
+Warranty: INT : Garantía en años.
+
 
 # **Modelado NoSQL en Cassandra:**
 Cassandra utiliza un modelo **orientado a columnas**, donde el diseño depende especificamente de las consultas que se realizarán.
