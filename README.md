@@ -53,7 +53,7 @@ Warranty: INT : Garantía en años.
 # **Modelado NoSQL en Cassandra:**
 Cassandra utiliza un modelo **orientado a columnas**, donde el diseño depende especificamente de las consultas que se realizarán.
 Por lo que creamos tres tablas principales:
-# Tabla 1: laptops_by_company  (tabla principal)
+# Tabla 1: laptops_by_company
 Consulta principal: *Obtener laptops por marca*
 PK: company
 CK: product
