@@ -125,6 +125,7 @@ WITH replication = {
 };
 ```
 2.-Creamos las tablas (anteriormente mencionadas)
+
 3.-Script de importación en Python:
 ```python
 from cassandra.cluster import Cluster
