@@ -13,7 +13,7 @@ Proyecto de base de datos NoSQL con Cassandra
 **Fecha de entrega:** 2 diciembre 2025
 
 # **Descripción del DataSet:**
-El dataset **“Laptop Price Dataset”** contiene información detallada sobre computadoras portátiles disponibles en el mercado, cada registro corresponde a un modelo de laptop con características como marca, procesador, RAM, almacenamiento, tarjeta gráfica, sistema operativo, peso y precio.
+El dataset **“Laptop Price Dataset”** contiene información detallada sobre computadoras portátiles disponibles en el mercado, cada registro corresponde a un modelo de laptop con características como marca, procesador, RAM, almacenamiento, tarjeta gráfica, sistema operativo, peso y precio. Este dataset es adecuado para bases como cassandra ya que debido a la estructura que maneja(tabular), la ausencia de relaciones complejas y la posibilidad que hay de consultar con diferentes criterios (por marca, procesador, precio).
 **Fuente:** Kaggle – Laptop Price Dataset (mkechinov)
 
 # **Diccionario de datos:**
@@ -44,8 +44,10 @@ Price_euros: Decimal : Precio en euros
 # **Modelado NoSQL en Cassandra:**
 Cassandra utiliza un modelo **orientado a columnas**, donde el diseño depende especificamente de las consultas que se realizarán.
 Por lo que creamos tres tablas principales:
-# Tabla 1: laptops_by_company  
+# Tabla 1: laptops_by_company  (tabla principal)
 Consulta principal: *Obtener laptops por marca*
+PK: company
+CK: product
 
 ```sql
 CREATE TABLE laptops_by_company (
@@ -66,6 +68,8 @@ CREATE TABLE laptops_by_company (
 ```
 # Tabla 2: laptops_by_cpu  
 Consulta principal: *Obtener laptops según procesador*
+PK: cpu
+CK: product
 ```sql
 CREATE TABLE laptops_by_cpu (
     cpu TEXT,
@@ -78,8 +82,11 @@ CREATE TABLE laptops_by_cpu (
     PRIMARY KEY (cpu, product)
 );
 ```
-# Tabla 3: laptops_by_priceRange  
+# Tabla 3: laptops_by_price_range  
 Consulta principal: *Obtener laptops por rango de precio*
+PK: price_range
+CK: product
+
 ```sql
 CREATE TABLE laptops_by_price_range (
     price_range TEXT,
@@ -92,6 +99,11 @@ CREATE TABLE laptops_by_price_range (
     PRIMARY KEY (price_range, product)
 );
 ```
+Clasifica los precios pór categorías:
+LOW: (<700€)
+MEDIUM:  (700-1200€)
+HIGH:  (>1200€)
+
 # **Herramientas usadas:**
 Cassandra: Base de datos NoSQL columnar
 
@@ -102,6 +114,8 @@ cassandra driver: Interseción de datos desde Phyton hacia Cassandra
 GitHub & GitHub Desktop: Control de versione sy repositorio
 
 # **Importanción de datos:**
+Primero descargamos el dataset
+Desde Kaggle: Laptop Price Dataset-mkechinov
 1.-Creamos el Keyspace:
 ```Sql
 CREATE KEYSPACE laptopsdb
@@ -146,7 +160,7 @@ for _, row in df.iterrows():
     """, (price_range, row['Product'], row['Company'], row['Cpu'], row['Ram'], row['Gpu'], row['Price_euros']))
 ```
 # **Sentencias para cada una de las operaciones CRUD:**
-1.-CRUD:
+1.-CREATE(insert):
 ```SQL
 INSERT INTO laptops_by_company (company, product, typeName, inches, screenResolution, cpu, ram, memory, gpu, opSys, weight, price_euros)
 VALUES ('Dell', 'XPS 14', 'Ultrabook', 14.0, '1920x1080', 'Intel i7', '16GB', '512GB SSD', 'Intel Iris', 'Windows 11', '1.3kg', 1500);
@@ -157,8 +171,10 @@ VALUES ('Intel i5', 'HP ProBook 450', 'HP', '8GB', '256GB SSD', 'Intel HD', 650)
 INSERT INTO laptops_by_price_range (price_range, product, company, cpu, ram, gpu, price_euros)
 VALUES ('Low', 'Acer Aspire 1', 'Acer', 'Intel Celeron', '4GB', '64GB Flash', 'Intel HD', 299);
 
-INSERT INTO laptops_by_company (...) VALUES (...);
-INSERT INTO laptops_by_cpu (...) VALUES (...);
+INSERT INTO laptops_by_company (company, product, typeName, inches, screenResolution, cpu, ram, memory, gpu, opSys, weight, price_euros)
+VALUES ('Dell', 'XPS 14', 'Ultrabook', 13.0, '1920x1080', 'Intel i7', '16GB', '512GB SSD', 'Intel Iris', 'Windows 10', '1.3kg', 1300);
+INSERT INTO laptops_by_cpu (cpu, product, company, ram, memory, gpu, price_euros)
+VALUES ('Intel i5', 'HP ProBook 450', 'HP', '16GB', '256GB SSD', 'Intel HD', 1000);
 ```
     1.1_READ:
 ```SQL
